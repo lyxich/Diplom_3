@@ -1,16 +1,13 @@
-import allure
 from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
+from pages.locators.profile_page_locators import *
 
 
 class ProfilePage(BasePage):
-    PROFILE_LINK = (By.LINK_TEXT, "Личный Кабинет")
-    LOGOUT_BUTTON = (By.LINK_TEXT, "Выход")
-
-    @allure.step("Переход в Личный кабинет")
     def go_to_profile(self):
-        self.open("https://stellarburgers.nomoreparties.site/account/profile")
+        self.open(PROFILE_PAGE_URL)
 
-    @allure.step("Выход из аккаунта")
+    def go_to_orders_history(self):
+        self.click_element(ORDERS_HISTORY_LINK)
+
     def logout(self):
-        self.click_element(self.LOGOUT_BUTTON)
+        self.click_element(LOGOUT_BUTTON)

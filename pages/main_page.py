@@ -1,22 +1,18 @@
-import allure
 from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
+from pages.locators.main_page_locators import *
 
 
 class MainPage(BasePage):
-    URL = "https://stellarburgers.nomoreparties.site/"
+    URL = MAIN_PAGE_URL
 
-    CONSTRUCTOR_LINK = (By.LINK_TEXT, "Конструктор")
-    INGREDIENT = (By.XPATH, "//span[text()='Соус фирменный Space']/ancestor::a")
-
-    @allure.step("Открытие главной страницы")
     def open_main(self):
         self.open(self.URL)
 
-    @allure.step("Переход в Конструктор")
     def go_to_constructor(self):
-        self.click_element(self.CONSTRUCTOR_LINK)
+        self.click_element(CONSTRUCTOR_LINK)
 
-    @allure.step("Клик по ингредиенту")
     def click_ingredient(self):
-        self.click_element(self.INGREDIENT)
+        self.click_element(INGREDIENT)
+
+    def make_order(self):
+        self.click_element(MAKE_ORDER_BUTTON)

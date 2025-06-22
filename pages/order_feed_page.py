@@ -1,20 +1,16 @@
-import allure
 from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
+from pages.locators.order_feed_locators import *
 
 
 class OrderFeedPage(BasePage):
-    URL = "https://stellarburgers.nomoreparties.site/feed"
-    FIRST_ORDER = (By.CSS_SELECTOR, ".OrderHistory_link__1iNBY")
-
-    @allure.step("Открытие страницы ленты заказов")
     def open_order_feed(self):
-        self.open(self.URL)
+        self.open(ORDER_FEED_URL)
 
-    @allure.step("Открытие первого заказа")
     def open_first_order(self):
-        self.click_element(self.FIRST_ORDER)
+        self.click_element(FIRST_ORDER)
 
-    @allure.step("Проверка наличия заказа в разделе «В работе»")
     def check_order_in_progress(self):
-        return self.find_element((By.XPATH, "//ul[@class='OrderFeed_list__OLh56']/li[1]")).is_displayed()
+        return self.find_element(ORDER_IN_PROGRESS_LOCATOR).is_displayed()
+
+    def get_total_orders(self):
+        return int(self.find_element(TOTAL_ORDERS_LOCATOR).text)
