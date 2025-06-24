@@ -5,6 +5,13 @@ from pages.profile_page import ProfilePage
 @allure.feature("Profile Page")
 class TestProfilePage:
 
+    @allure.title("Переход в Личный кабинет")
+    def test_go_to_profile(setup):
+        driver = setup
+        profile_page = ProfilePage(driver)
+        profile_page.go_to_profile()
+        assert "account/profile" in driver.current_url
+
     @allure.title("Переход в историю заказов")
     def test_go_to_orders_history(self, setup, auth_token):
         page = ProfilePage(setup)

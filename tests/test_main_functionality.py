@@ -1,21 +1,42 @@
 import allure
-from pages.main_page import MainPage
+from pages.constructor_page import ConstructorPage
 
 
-@allure.feature("Main Page")
-class TestMainFunctionality:
+@allure.feature("Конструктор бургеров")
+class TestConstructorFunctionality:
 
-    @allure.title("Переход в Конструктор")
-    def test_go_to_constructor(self, setup):
-        page = MainPage(setup)
-        page.open_main()
-        page.go_to_constructor()
-        assert "constructor" in page.get_current_url(), "URL не содержит 'constructor'"
+    @allure.title("Переход по клику на «Конструктор»")
+    def test_open_constructor(self, setup):
+        page = ConstructorPage(setup)
+        page.open_constructor()
 
-    @allure.title("Клик по ингредиенту открывает модальное окно")
+    @allure.title("Открытие деталей ингредиента")
     def test_click_ingredient_opens_modal(self, setup):
-        page = MainPage(setup)
-        page.open_main()
+        page = ConstructorPage(setup)
+        page.open_constructor()
         page.click_ingredient()
-        modal = page.find_element((By.XPATH, "//div[contains(@class, 'Modal_modal_opened')]"))
-        assert modal.is_displayed(), "Модальное окно не открылось"
+        assert page.is_modal_opened(), "Модальное окно не открылось"
+
+    @allure.title("Модальное окно закрывается")
+    def test_modal_closes(self, setup):
+        page = ConstructorPage(setup)
+        page.open_constructor()
+        page.click_ingredient()
+        page.close_modal()
+        assert not page.is_modal_opened(), "Модальное окно не закрылось"
+
+    @allure.title("Каунтер увеличивается при добавлении ингредиента")
+    def test_counter_increases_on_add(self, setup):
+        page = ConstructorPage(setup)
+        page.open_constructor()
+        initial = page.get_ingredient_counter_value()
+        page.click_ingredient()
+        final = page.get_ingredient_counter_value()
+        assert final > initial, "Каунтер не увеличился"
+
+    @allure.title("Оформление заказа")
+    def test_make_order(self, setup):
+        page = ConstructorPage(setup)
+        page.open_constructor()
+        page.click_ingredient()
+        page.make_order()

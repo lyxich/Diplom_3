@@ -9,16 +9,18 @@ def auth_token():
     password = "password"
     name = "New User"
 
-    # Регистрация
+    # Регистрация пользователя
     register_response = register_user(email, password, name)
-    if register_response.status_code == 403:
-        # Если пользователь уже существует — удаляем его и регистрируем заново
-        delete_user(login_user(email, password).json()['accessToken'])
 
-        register_response = register_user(email, password, name)
+    if register_response.status_code not in [200, 201]:
+        raise RuntimeError(f"Failed to register user: {register_response.text}")
 
-    assert register_response.status_code in [200, 201], f"Unexpected status code: {register_response.status_code}"
-    token = login_user(email, password).json()['accessToken']
+    # Логин и получение токена
+    login_response = login_user(email, password)
+    if login_response.status_code != 200:
+        raise RuntimeError(f"Failed to login user: {login_response.text}")
+
+    token = login_response.json()['accessToken']
 
     yield token
 
