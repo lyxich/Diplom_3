@@ -3,7 +3,7 @@ from pages.base_page import BasePage
 from pages.locators.order_feed_page_locators import *
 
 
-@allure.step("Лента заказов")
+@allure.title("Лента заказов")
 class OrderFeedPage(BasePage):
 
     @allure.step("Открыть ленту заказов")

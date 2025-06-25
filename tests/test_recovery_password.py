@@ -9,6 +9,7 @@ class TestRecoveryPassword:
     def test_go_to_recovery(self, setup):
         page = RecoveryPage(setup)
         page.open_recovery()
+        assert "forgot-password" in page.get_current_url(), "Не открыта страница восстановления пароля"
 
     @allure.title("Ввод почты и нажатие «Восстановить»")
     def test_enter_email_and_click_recovery(self, setup):
@@ -16,6 +17,7 @@ class TestRecoveryPassword:
         page.open_recovery()
         page.enter_email("test@example.com")
         page.click_recovery_button()
+        assert "forgot-password" in page.get_current_url(), "Не открыта страница восстановления пароля"
 
     @allure.title("Кнопка показать/скрыть пароль делает поле активным")
     def test_show_password_field_activates_input(self, setup):

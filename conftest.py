@@ -26,3 +26,31 @@ def auth_token():
 
     # Удаление после теста
     delete_user(token)
+
+
+@pytest.fixture(scope="function")
+def create_order(auth_token):
+    api = ApiClient()
+    response = api.create_order(auth_token, ORDER_DATA["simple_burger"])
+
+    if response.status_code != 200:
+        pytest.fail(f"Order creation failed with status code {response.status_code}")
+
+    order_data = response.json()
+
+    yield order_data  # передаём данные заказа в тесты
+
+
+@pytest.fixture(scope="function")
+def setup(request):
+    browser = request.param
+    if browser == "chrome":
+        driver = webdriver.Chrome()
+    elif browser == "firefox":
+        driver = webdriver.Firefox()
+    else:
+        raise ValueError(f"Unsupported browser: {browser}")
+
+    driver.maximize_window()
+    yield driver
+    driver.quit()

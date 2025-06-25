@@ -3,7 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import allure
 
 
-@allure.step("Базовая страница")
+@allure.title("Базовая страница")
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
