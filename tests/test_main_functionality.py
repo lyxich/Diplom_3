@@ -2,7 +2,6 @@ import allure
 from pages.constructor_page import ConstructorPage
 
 
-@allure.feature("Конструктор бургеров")
 class TestConstructorFunctionality:
 
     @allure.title("Переход по клику на «Конструктор»")

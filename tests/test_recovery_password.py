@@ -2,7 +2,6 @@ import allure
 from pages.recovery_page import RecoveryPage
 
 
-@allure.feature("Восстановление пароля")
 class TestRecoveryPassword:
 
     @allure.title("Переход к восстановлению пароля")

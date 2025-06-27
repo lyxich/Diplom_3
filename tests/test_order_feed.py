@@ -2,7 +2,6 @@ import allure
 from pages.order_feed_page import OrderFeedPage
 
 
-@allure.feature("Лента заказов")
 class TestOrderFeed:
 
     @allure.title("Открытие деталей заказа")

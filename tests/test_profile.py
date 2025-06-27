@@ -2,7 +2,6 @@ import allure
 from pages.profile_page import ProfilePage
 
 
-@allure.feature("Profile Page")
 class TestProfilePage:
 
     @allure.title("Переход в Личный кабинет")

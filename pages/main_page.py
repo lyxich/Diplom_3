@@ -3,7 +3,6 @@ from pages.base_page import BasePage
 from pages.locators.constructor_page_locators import *
 
 
-@allure.title("Конструктор бургеров")
 class ConstructorPage(BasePage):
 
     @allure.step("Перейти в конструктор")

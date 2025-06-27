@@ -3,7 +3,6 @@ from pages.base_page import BasePage
 from pages.locators.recovery_page_locators import *
 
 
-@allure.title("Страница восстановления пароля")
 class RecoveryPage(BasePage):
 
     @allure.step("Перейти на страницу восстановления пароля")

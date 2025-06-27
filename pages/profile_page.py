@@ -3,7 +3,6 @@ from pages.locators.profile_page_locators import *
 import allure
 
 
-@allure.title("Профиль пользователя")
 class ProfilePage(BasePage):
 
     @allure.step("Открыть страницу профиля")
