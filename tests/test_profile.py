@@ -9,7 +9,7 @@ class TestProfilePage:
         driver = setup
         profile_page = ProfilePage(driver)
         profile_page.go_to_profile()
-        assert "account/profile" in driver.current_url
+        assert "account/profile" in page.get_current_url(), "Не удалось перейти в Личный кабинет"
 
     @allure.title("Переход в историю заказов")
     def test_go_to_orders_history(self, setup, auth_token):

@@ -38,7 +38,7 @@ def create_order(auth_token):
 
     order_data = response.json()
 
-    yield order_data  # передаём данные заказа в тесты
+    return order_data  # передаём данные заказа в тесты
 
 
 @pytest.fixture(scope="function")

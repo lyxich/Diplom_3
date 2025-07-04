@@ -8,6 +8,7 @@ class TestConstructorFunctionality:
     def test_open_constructor(self, setup):
         page = ConstructorPage(setup)
         page.open_constructor()
+        assert "constructor" in page.get_current_url(), "Конструктор не открыт"
 
     @allure.title("Открытие деталей ингредиента")
     def test_click_ingredient_opens_modal(self, setup):
@@ -39,3 +40,4 @@ class TestConstructorFunctionality:
         page.open_constructor()
         page.click_ingredient()
         page.make_order()
+        assert page.is_modal_opened(), "Модальное окно с подтверждением заказа не открылось"
